@@ -4,7 +4,7 @@ const MenuItem = ({ item }) => {
     <>
       <div className="flex">
         <img
-          className="w-20 rounded-tr-[200px] rounded-br-[200px] rounded-bl-[200px]"
+          className="w-20 h-20 rounded-tr-[200px] rounded-br-[200px] rounded-bl-[200px]"
           src={image}
         />
         <div className="ml-2">

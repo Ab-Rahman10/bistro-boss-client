@@ -14,10 +14,10 @@ const PopularMenu = () => {
       });
   }, []);
   return (
-    <div className="w-11/12 md:w-10/12 lg:w-9/12 mx-auto my-7">
+    <div className="w-11/12 md:w-10/12 lg:w-9/12 mx-auto my-20">
       <SectionTitle
-        subTitle={"---Check it out---"}
-        title={"FROM OUR MENU"}
+        subTitle={"--- Don't miss ---"}
+        title={"Today's offer"}
       ></SectionTitle>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
         {menu.map((item) => (

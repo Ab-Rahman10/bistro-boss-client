@@ -1,11 +1,13 @@
+import { Link } from "react-router-dom";
+
 const Navbar = () => {
   const navLinks = (
     <>
       <li>
-        <a>Item 1</a>
+        <Link to="/">Home</Link>
       </li>
       <li>
-        <a>Parent</a>
+        <Link to="/menu">Our Menu</Link>
       </li>
       <li>
         <a>Item 3</a>
@@ -13,8 +15,8 @@ const Navbar = () => {
     </>
   );
   return (
-    <div className="w-11/12 md:w-10/12 lg:w-9/12 mx-auto">
-      <div className="navbar bg-black text-white bg-opacity-50 fixed z-10 w-11/12 md:w-10/12 lg:w-9/12">
+    <div className="">
+      <div className="navbar bg-black text-white bg-opacity-50 fixed z-10 ">
         <div className="navbar-start">
           <div className="dropdown">
             <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -35,7 +37,7 @@ const Navbar = () => {
             </div>
             <ul
               tabIndex={0}
-              className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow"
+              className="menu menu-sm dropdown-content bg-base-100 rounded-box text-black z-[1] mt-3 w-52 p-2 shadow"
             >
               {navLinks}
             </ul>
@@ -43,7 +45,7 @@ const Navbar = () => {
           <a className="btn btn-ghost text-xl">Bistro Boss</a>
         </div>
         <div className="navbar-center hidden lg:flex">
-          <ul className="menu menu-horizontal px-1">{navLinks}</ul>
+          <ul className="menu-horizontal space-x-8 px-1">{navLinks}</ul>
         </div>
         <div className="navbar-end">
           <a className="btn">Button</a>

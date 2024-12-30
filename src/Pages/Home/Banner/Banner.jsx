@@ -9,7 +9,7 @@ import slide6 from "../../../assets/home/06.png";
 
 const Banner = () => {
   return (
-    <div className="w-11/12 md:w-10/12 lg:w-9/12 mx-auto">
+    <div className="mb-5">
       <Carousel>
         <div>
           <img src={slide2} />
