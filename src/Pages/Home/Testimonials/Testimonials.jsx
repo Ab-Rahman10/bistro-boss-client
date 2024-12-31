@@ -10,14 +10,11 @@ import { Navigation } from "swiper/modules";
 import { useEffect, useState } from "react";
 import { Rating } from "@smastrom/react-rating";
 import "@smastrom/react-rating/style.css";
+import useTestimonials from "../../../Hooks/UseTestimonials";
 
 const Testimonials = () => {
-  const [reviews, setReviews] = useState([]);
-  useEffect(() => {
-    fetch("reviews.json")
-      .then((res) => res.json())
-      .then((data) => setReviews(data));
-  }, []);
+  const reviews = useTestimonials();
+
   return (
     <div className="w-11/12 md:w-10/12 lg:w-9/12 mx-auto mb-10">
       <SectionTitle
