@@ -1,16 +1,17 @@
 import React from "react";
 import Navbar from "../../Components/Shared/Navbar";
-import { Outlet } from "react-router-dom";
+import { Outlet, useLocation } from "react-router-dom";
 import Footer from "../../Components/Shared/Footer";
 
 const MainLayout = () => {
+  const { pathname } = useLocation();
+  const noNavbarFooter = pathname === "/login" || pathname === "/signUp";
+
   return (
     <div>
-      <Navbar></Navbar>
-      {/* <section className="min-h-[calc(100vh-298px)]"> */}
+      {!noNavbarFooter && <Navbar></Navbar>}
       <Outlet></Outlet>
-      {/* </section> */}
-      <Footer></Footer>
+      {!noNavbarFooter && <Footer></Footer>}
     </div>
   );
 };
