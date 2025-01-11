@@ -7,11 +7,14 @@ import {
   validateCaptcha,
 } from "react-simple-captcha";
 import { AuthContext } from "../../Provider/AuthProvider";
+import useAuth from "../../Hooks/useAuth";
+import SocialLogin from "../../Hooks/SocialLogin";
 
 const Login = () => {
   const { login } = useContext(AuthContext);
   const navigate = useNavigate();
   const location = useLocation();
+  const { googleSignIn } = useAuth();
 
   const captchaRef = useRef(null);
   const [disabled, setDisabled] = useState(true);
@@ -87,18 +90,20 @@ const Login = () => {
                     placeholder="Type the captcha above"
                     className="input input-bordered w-full"
                     onBlur={handleValidateCaptcha}
-                    required
                   />
                 </div>
                 <div className="form-control mt-6">
                   <button
                     type="submit"
-                    disabled={disabled}
+                    disabled={false}
                     className="btn btn-primary w-full"
                   >
                     Login
                   </button>
                 </div>
+                {/* google sign in */}
+                <SocialLogin></SocialLogin>
+
                 <div className="mt-4 text-center">
                   <p className="text-sm">
                     New here? {""}

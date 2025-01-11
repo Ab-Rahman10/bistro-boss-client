@@ -3,20 +3,44 @@ import { Helmet } from "react-helmet-async";
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../Provider/AuthProvider";
+import UseAxiosPublic from "../../Hooks/useAxiosPublic";
+import useAuth from "../../Hooks/useAuth";
+import SocialLogin from "../../Hooks/SocialLogin";
 
-const SignIn = () => {
-  const { createUser } = useContext(AuthContext);
+const SignUp = () => {
+  const { createUser, userUpdateProfile } = useContext(AuthContext);
   const navigate = useNavigate();
+  const axiosPublic = UseAxiosPublic();
+  const { googleSignIn } = useAuth();
+
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
 
-  const onSubmit = (data) => {
-    createUser(data.email, data.password).then((result) => console.log(result));
-    navigate("/");
+  const onSubmit = async (data) => {
+    try {
+      const result = await createUser(data.email, data.password);
+      console.log(result);
+
+      await userUpdateProfile(data.name, data.photoURL);
+
+      // send user info to db
+      const userInfo = {
+        name: data.name,
+        email: data.email,
+        photo: data.photoURL,
+      };
+      const response = await axiosPublic.post("/users", userInfo);
+      console.log(response.data);
+
+      navigate("/");
+    } catch (err) {
+      console.error(err);
+    }
   };
+
   return (
     <>
       <Helmet>
@@ -43,6 +67,24 @@ const SignIn = () => {
                   {errors.name && (
                     <span className="text-xs text-red-500 mt-1">
                       Name is required
+                    </span>
+                  )}
+                </div>
+                {/* PhotoURL */}
+                <div className="form-control mb-4">
+                  <label className="label">
+                    <span className="label-text">PhotURL</span>
+                  </label>
+                  <input
+                    {...register("photoURL", { required: true })}
+                    name="photoURL"
+                    type="text"
+                    placeholder="Your Photo URL"
+                    className="input input-bordered w-full"
+                  />
+                  {errors.photoURL && (
+                    <span className="text-xs text-red-500 mt-1">
+                      PhotoURL is required
                     </span>
                   )}
                 </div>
@@ -102,6 +144,8 @@ const SignIn = () => {
                     Sign Up
                   </button>
                 </div>
+                {/* Google sign in */}
+                <SocialLogin></SocialLogin>
                 <div className="mt-4 text-center">
                   <p className="text-sm">
                     Already have an account?{" "}
@@ -126,4 +170,4 @@ const SignIn = () => {
   );
 };
 
-export default SignIn;
+export default SignUp;

@@ -1,9 +1,13 @@
 import { useContext } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../Provider/AuthProvider";
+import { FaShoppingCart } from "react-icons/fa";
+import UseCart from "../../Hooks/UseCart";
 
 const Navbar = () => {
   const { user, logout } = useContext(AuthContext);
+  const [carts, isLoading] = UseCart();
+
   const navLinks = (
     <>
       <li>
@@ -70,7 +74,16 @@ const Navbar = () => {
         <div className="navbar-center hidden lg:flex">
           <ul className="menu-horizontal space-x-8 px-1">{navLinks}</ul>
         </div>
-        <div className="navbar-end">
+        <div className="navbar-end space-x-2">
+          <Link to="dashboard">
+            <div className="flex items-center mr-2">
+              <FaShoppingCart className="text-3xl" />
+              <div className="badge badge-secondary -mt-4">
+                +{carts?.length}
+              </div>
+            </div>
+          </Link>
+          <img className="w-10 rounded-full" src={user?.photoURL} alt="" />
           <a className="btn">Button</a>
         </div>
       </div>
