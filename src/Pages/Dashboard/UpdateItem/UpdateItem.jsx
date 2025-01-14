@@ -3,7 +3,7 @@ import UseAxiosPublic from "../../../Hooks/useAxiosPublic";
 import UseAxiosSecure from "../../../Hooks/UseAxiosSecure";
 import Swal from "sweetalert2";
 import SectionTitle from "../../../Components/Shared/SectionTitle/SectionTitle";
-import { useLoaderData, useNavigate } from "react-router-dom";
+import { useLoaderData } from "react-router-dom";
 
 const image_hosting_api = `https://api.imgbb.com/1/upload?key=${
   import.meta.env.VITE_IMAGE_HOSTING_KEY

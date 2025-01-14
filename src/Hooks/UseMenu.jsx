@@ -18,7 +18,7 @@ const useMenu = () => {
   // }, []);
 
   const {
-    data: menu,
+    data: menu = [],
     isLoading: loading,
     refetch,
   } = useQuery({

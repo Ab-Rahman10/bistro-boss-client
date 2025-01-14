@@ -2,6 +2,7 @@ import { FaTrash } from "react-icons/fa";
 import UseCart from "../../../Hooks/UseCart";
 import Swal from "sweetalert2";
 import UseAxiosSecure from "../../../Hooks/UseAxiosSecure";
+import { Link } from "react-router-dom";
 
 const Cart = () => {
   const axiosSecure = UseAxiosSecure();
@@ -38,9 +39,22 @@ const Cart = () => {
         <li>Total Order: {carts.length} </li>
         <li>Price: {totalPrice.toFixed(2)} </li>
         <li>
-          <button className="py-0.5 px-3 rounded-md bg-blue-500 text-white">
-            Pay
-          </button>
+          {carts.length ? (
+            <Link to="/dashboard/payment">
+              <button className="py-0.5 px-3 rounded-md bg-blue-500 text-white">
+                Pay
+              </button>
+            </Link>
+          ) : (
+            <Link>
+              <button
+                disabled
+                className="py-0.5 px-3 rounded-md bg-blue-500 text-white disabled:cursor-not-allowed"
+              >
+                Pay
+              </button>
+            </Link>
+          )}
         </li>
       </ul>
       {/* Table */}
