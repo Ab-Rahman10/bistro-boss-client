@@ -13,9 +13,10 @@ import {
 import { ImSpoonKnife } from "react-icons/im";
 import { NavLink, Outlet } from "react-router-dom";
 import useAdmin from "../../Hooks/useAdmin";
+import UseCart from "../../Hooks/UseCart";
 
 const Dashboard = () => {
-  // TODO:
+  const [carts] = UseCart();
   const [isAdmin] = useAdmin();
 
   return (
@@ -64,7 +65,7 @@ const Dashboard = () => {
               </li>
               <li>
                 <NavLink className="flex items-center gap-2" to="cart">
-                  <FaShoppingCart></FaShoppingCart> My Cart
+                  <FaShoppingCart></FaShoppingCart> My Cart: ({carts.length})
                 </NavLink>
               </li>
               <li>
@@ -78,37 +79,15 @@ const Dashboard = () => {
                 </NavLink>
               </li>
               <li>
-                <NavLink className="flex items-center gap-2" to="myBooking">
-                  <FaList></FaList> My Booking
+                <NavLink
+                  className="flex items-center gap-2"
+                  to="paymentHistory"
+                >
+                  <FaList></FaList> Payment History
                 </NavLink>
               </li>
             </>
           )}
-          {/* <li>
-            <NavLink className="flex items-center gap-2" to="userHome">
-              <FaHome></FaHome> User Home
-            </NavLink>
-          </li>
-          <li>
-            <NavLink className="flex items-center gap-2" to="cart">
-              <FaShoppingCart></FaShoppingCart> My Cart
-            </NavLink>
-          </li>
-          <li>
-            <NavLink className="flex items-center gap-2" to="reservation">
-              <FaCalendar></FaCalendar> Reservation
-            </NavLink>
-          </li>
-          <li>
-            <NavLink className="flex items-center gap-2" to="review">
-              <FaAd></FaAd> Add a Review
-            </NavLink>
-          </li>
-          <li>
-            <NavLink className="flex items-center gap-2" to="myBooking">
-              <FaList></FaList> My Booking
-            </NavLink>
-          </li> */}
           {/* Shared nav */}
           <div className="divider"></div>
           <li>
