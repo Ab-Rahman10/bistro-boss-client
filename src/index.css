@@ -4,6 +4,7 @@
 
 .active {
   background-color: blue;
-  padding: 2px 4px;
+  padding: 2px 7px;
   color: white;
+  border-radius: 5px;
 }

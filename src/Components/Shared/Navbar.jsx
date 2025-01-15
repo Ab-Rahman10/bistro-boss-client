@@ -1,28 +1,35 @@
 import { useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { AuthContext } from "../../Provider/AuthProvider";
 import { FaShoppingCart } from "react-icons/fa";
 import UseCart from "../../Hooks/UseCart";
+import useAdmin from "../../Hooks/useAdmin";
 
 const Navbar = () => {
   const { user, logout } = useContext(AuthContext);
+  const [isAdmin] = useAdmin();
   const [carts, isLoading] = UseCart();
 
   const navLinks = (
     <>
       <li>
-        <Link to="/">Home</Link>
+        <NavLink to="/">Home</NavLink>
       </li>
       <li>
-        <Link to="/menu">Our Menu</Link>
+        <NavLink to="/menu">Our Menu</NavLink>
       </li>
       <li>
-        <Link to="/order/salad">Our Shop</Link>
+        <NavLink to="/order/salad">Our Shop</NavLink>
       </li>
-      <li>
-        <Link to="/secret">Secret</Link>
-      </li>
-
+      {user && isAdmin ? (
+        <li>
+          <NavLink to="/dashboard/adminHome">Dashboard</NavLink>
+        </li>
+      ) : user && !isAdmin ? (
+        <li>
+          <NavLink to="/dashboard/userHome">Dashboard</NavLink>
+        </li>
+      ) : null}
       {user ? (
         <li>
           <button onClick={logout} className=" btn-ghost">
@@ -83,7 +90,9 @@ const Navbar = () => {
               </div>
             </div>
           </Link>
-          <img className="w-10 rounded-full" src={user?.photoURL} alt="" />
+          {user?.photoURL && (
+            <img className="w-10 rounded-full" src={user?.photoURL} />
+          )}
           <a className="btn">Button</a>
         </div>
       </div>
